@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>Resizable Columns</title>
+		<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../jquery/jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="../jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../jquery/jquery-ui.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<div class="logo-container">
+				<div class="icon-paw"></div>
+				<p>CodePaw</p>
+			</div>
+			<div class="button-container">
+				<div id="html" class="button selected">HTML</div>
+				<div id="css" class="button">CSS</div>
+				<div id="js" class="button">JavaScript</div>
+				<div id="output" class="button selected">Output</div>
+			</div>
+		</header>
+		<div class="container">
+			<div class="col-wrapper">
+				<div id="col-html" class="col">
+					<div class="col-header">HTML</div>
+					<textarea id="content-html"><p>Hey there!</p></textarea>
+				</div>
+				<div id="col-css" class="col hidden">
+					<div class="col-header">CSS</div>
+					<textarea id="content-css">body {background: #EEE;}
+							
+							p { font-family: 'Open Sans', Arial, sans-serif; 
+							font-size: 18px; 
+							color: sienna;}
+					</textarea>
+				</div>
+				<div id="col-js" class="col hidden">
+					<div class="col-header">JS</div>
+					<textarea id="content-js"></textarea>
+				</div>
+				<div id="col-output" class="col">
+					<div class="col-header">Output</div>
+					<iframe></iframe>
+				</div>
+			</div>
+			<footer><p>A Peppercorn Production</p></footer>
+		</div>
+		
+		<script type="text/javascript">						
+			function updateOutput() {
+				var head = $('iframe').contents().find('head');
+				var css = "<style type='text/css'>" + $("#content-css").val() + "</style>";
+				var js = "<scr" + "ipt " + "type='text/javascript'>" + $("#content-js").val() + "</scr" + "ipt>";
+				$(head).append(css);
+				$(head).append(js);
+				$('iframe').contents().find('body').html( $("#content-html").val() );
+			};
+			
+			//Set initial col width and code
+			$(function() {
+				updateOutput();
+			});
+			
+			//Change code dynamically
+			$("textarea").on('change keyup paste', function(){
+				updateOutput();
+			});
+			
+			//Toggle button state + column visibility and width
+			$(".button").click(function() {
+				$(this).toggleClass("selected");
+				var colId = "col-" + $(this).attr("id");
+				$("#" + colId).toggleClass("hidden");
+			});
+
+		</script>
+	</body>
+</html>
