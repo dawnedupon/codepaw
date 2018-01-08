@@ -3,10 +3,8 @@
 		<title>Resizable Columns</title>
 		<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../jquery/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<script type="text/javascript" src="../jquery/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>	
 	</head>
 	<body>
 		<header>
@@ -47,34 +45,6 @@
 			</div>
 			<footer><p>A Peppercorn Production</p></footer>
 		</div>
-		
-		<script type="text/javascript">						
-			function updateOutput() {
-				var head = $('iframe').contents().find('head');
-				var css = "<style type='text/css'>" + $("#content-css").val() + "</style>";
-				var js = "<scr" + "ipt " + "type='text/javascript'>" + $("#content-js").val() + "</scr" + "ipt>";
-				$(head).append(css);
-				$(head).append(js);
-				$('iframe').contents().find('body').html( $("#content-html").val() );
-			};
-			
-			//Set initial col width and code
-			$(function() {
-				updateOutput();
-			});
-			
-			//Change code dynamically
-			$("textarea").on('change keyup paste', function(){
-				updateOutput();
-			});
-			
-			//Toggle button state + column visibility and width
-			$(".button").click(function() {
-				$(this).toggleClass("selected");
-				var colId = "col-" + $(this).attr("id");
-				$("#" + colId).toggleClass("hidden");
-			});
-
-		</script>
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
